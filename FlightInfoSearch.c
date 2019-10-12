@@ -1,6 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
-#include<stdlib.h>
 #include<string.h>
 #include "Flight.h"
 
@@ -11,7 +10,7 @@
 void SearchSelectOne(flightLists *info)
 {
 	int one = -1;
-
+	printf("\n");
 	puts("\t-------------------------");
 	puts("\t|\t1.航班号\t|");
 	puts("\t-------------------------");
@@ -25,7 +24,7 @@ void SearchSelectOne(flightLists *info)
 	puts("\t-------------------------");
 	puts("\t|\t6.机型\t\t|");
 	puts("\t-------------------------");
-	puts("\t|\t0.退出程序\t|");
+	puts("\t|\t0.退出查询\t|");
 	puts("\t-------------------------");
 
 	printf("请输入想通过的信息查询航班信息(0-6):");
@@ -35,7 +34,8 @@ void SearchSelectOne(flightLists *info)
 			switch (one)
 			{
 				case 0:
-						break;
+					SelectOptions(info);
+					break;
 				case 1:
 					searchByFlightNum(info);
 					break;
@@ -65,6 +65,8 @@ void SearchSelectOne(flightLists *info)
 void searchByFlightNum(flightLists *info)
 {
 	char flightNumOne[10];             //航班号
+	int judge = 0;                     //判断是否查询到信息
+
 	printf("\n请输入所要查询的航班号：");
 	gets(flightNumOne);
 	gets(flightNumOne);
@@ -76,31 +78,48 @@ void searchByFlightNum(flightLists *info)
 	{
 		if (strcmp(info->infos[i].FlightNum, flightNumOne) == 0)   //如果所查询的航班号存在则打印出来
 		{
-			printf("\t|    %s  |\t %s   |    %s       |\t%s     |      %s      |    %s      |    %d      |\n", info->infos[i].FlightNum, info->infos[i].StartPoint, info->infos[i].EndPoint,
+			printf("\t|    %s  |\t %s   |    %s       |\t%s     |      %s      |    %s      |    %d       |\n", info->infos[i].FlightNum, info->infos[i].StartPoint, info->infos[i].EndPoint,
 				info->infos[i].StartTime, info->infos[i].EndTime, info->infos[i].PlaneType, info->infos[i].price);
 			puts("\t-------------------------------------------------------------------------------------------------------------------------");
-
-		}else
-			if (i == info->length - 1)
-			{
-				printf("\n\n");
-				printf("\t\t\t---------------------------------------------------------\n");
-				printf("\t\t\t|\t\t所查询的航班号\"%s\"为空！！！\t\t|\n", flightNumOne);
-				printf("\t\t\t---------------------------------------------------------\n");
-				printf("是否继续查询(y/n):");
-				scanf("%c", &yOrn);
-				if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
-					SearchSelectOne(info);
-				else
-					break;
-			}
+			judge++;
+		}
 	}
+
+	if (judge == 0)
+	{
+		printf("\n\n");
+		printf("\t\t\t---------------------------------------------------------\n");
+		printf("\t\t\t|\t\t所查询的航班号\"%s\"为空！！！\t\t|\n", flightNumOne);
+		printf("\t\t\t---------------------------------------------------------\n");
+		printf("是否继续查询(y/n):");
+		scanf("%c", &yOrn);
+		if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
+		{
+			SearchSelectOne(info);
+			return;
+		}
+		else
+		{
+			SelectOptions(info);
+			return;
+		}
+	}
+
+	printf("\n是否退出查询操作(y/n):");
+	scanf("%c", &yOrn);
+	printf("\n");
+	if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
+		SelectOptions(info);
+	else
+		SearchSelectOne(info);
 }
 
 //通过起点站查询
 void searchByStartPoint(flightLists *info)
 {
 	char StartPoint[10];			//起点站
+	int judge = 0;                     //判断是否查询到信息
+
 	printf("\n请输入所要查询的起点站：");
 	gets(StartPoint);
 	gets(StartPoint);
@@ -115,30 +134,45 @@ void searchByStartPoint(flightLists *info)
 			printf("\t|    %s  |\t %s   |    %s       |\t%s     |      %s      |    %s      |    %d      |\n", info->infos[i].FlightNum, info->infos[i].StartPoint, info->infos[i].EndPoint,
 				info->infos[i].StartTime, info->infos[i].EndTime, info->infos[i].PlaneType, info->infos[i].price);
 			puts("\t-------------------------------------------------------------------------------------------------------------------------");
+			judge++;
+		}
+	}
 
+	if (judge == 0)
+	{
+		printf("\n\n");
+		printf("\t\t\t---------------------------------------------------------\n");
+		printf("\t\t\t|\t\t所查询的航班号\"%s\"为空！！！\t\t|\n", StartPoint);
+		printf("\t\t\t---------------------------------------------------------\n");
+		printf("是否继续查询(y/n):");
+		scanf("%c", &yOrn);
+		if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
+		{
+			SearchSelectOne(info);
+			return;
 		}
 		else
-			if (i == info->length - 1)
-			{
-				printf("\n\n");
-				printf("\t\t\t---------------------------------------------------------\n");
-				printf("\t\t\t|\t\t所查询的起点站\"%s\"为空！！！\t\t|\n", StartPoint);
-				printf("\t\t\t---------------------------------------------------------\n");
-				printf("是否继续查询(y/n):");
-				scanf("%c", &yOrn);
-				printf("/n");
-				if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
-					SearchSelectOne(info);
-				else
-					break;
-			}
+		{
+			SelectOptions(info);
+			return;
+		}
 	}
+
+	printf("是否退出查询操作(y/n):");
+	scanf("%c", &yOrn);
+	printf("/n");
+	if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
+		SelectOptions(info);
+	else
+		SearchSelectOne(info);
 }
 
 //通过终点站查询
 void searchByEndPoint(flightLists *info)
 {
 	char EndPoint[10];				//终点站
+	int judge = 0;                     //判断是否查询到信息
+
 	printf("\n请输入所要查询的终点站：");
 	gets(EndPoint);
 	gets(EndPoint);
@@ -153,24 +187,38 @@ void searchByEndPoint(flightLists *info)
 			printf("\t|    %s  |\t %s   |    %s       |\t%s     |      %s      |    %s      |    %d      |\n", info->infos[i].FlightNum, info->infos[i].StartPoint, info->infos[i].EndPoint,
 				info->infos[i].StartTime, info->infos[i].EndTime, info->infos[i].PlaneType, info->infos[i].price);
 			puts("\t-------------------------------------------------------------------------------------------------------------------------");
+			judge++;
+		}
 
+	}
+
+	if (judge == 0)
+	{
+		printf("\n\n");
+		printf("\t\t\t---------------------------------------------------------\n");
+		printf("\t\t\t|\t\t所查询的航班号\"%s\"为空！！！\t\t|\n", EndPoint);
+		printf("\t\t\t---------------------------------------------------------\n");
+		printf("是否继续查询(y/n):");
+		scanf("%c", &yOrn);
+		if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
+		{
+			SearchSelectOne(info);
+			return;
 		}
 		else
-			if (i == info->length - 1)
-			{
-				printf("\n\n");
-				printf("\t\t\t---------------------------------------------------------\n");
-				printf("\t\t\t|\t\t所查询的终点站\"%s\"为空！！！\t\t|\n", EndPoint);
-				printf("\t\t\t---------------------------------------------------------\n");
-				printf("是否继续查询(y/n):");
-				scanf("%c", &yOrn);
-				printf("/n");
-				if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
-					SearchSelectOne(info);
-				else
-					break;
-			}
+		{
+			SelectOptions(info);
+			return;
+		}
 	}
+
+	printf("是否退出查询操作(y/n):");
+	scanf("%c", &yOrn);
+	printf("/n");
+	if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
+		SelectOptions(info);
+	else
+		SearchSelectOne(info);
 }
 
 
@@ -179,6 +227,8 @@ void searchByEndPoint(flightLists *info)
 void searchByStartTime(flightLists *info)
 {
 	char StartTime[15];				//起飞时间
+	int judge = 0;                     //判断是否查询到信息
+
 	printf("\n请输入所要查询的起飞时间：");
 	gets(StartTime);
 	gets(StartTime);
@@ -193,29 +243,46 @@ void searchByStartTime(flightLists *info)
 			printf("\t|    %s  |\t %s   |    %s       |\t%s     |      %s      |    %s      |    %d      |\n", info->infos[i].FlightNum, info->infos[i].StartPoint, info->infos[i].EndPoint,
 				info->infos[i].StartTime, info->infos[i].EndTime, info->infos[i].PlaneType, info->infos[i].price);
 			puts("\t-------------------------------------------------------------------------------------------------------------------------");
+			judge++;
+		}
 
+	}
+
+	if (judge == 0)
+	{
+		printf("\n\n");
+		printf("\t\t\t---------------------------------------------------------\n");
+		printf("\t\t\t|\t\t所查询的航班号\"%s\"为空！！！\t\t|\n", StartTime);
+		printf("\t\t\t---------------------------------------------------------\n");
+		printf("是否继续查询(y/n):");
+		scanf("%c", &yOrn);
+		if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
+		{
+			SearchSelectOne(info);
+			return;
 		}
 		else
-			if (i == info->length - 1)
-			{
-				printf("\n\n");
-				printf("\t\t\t-----------------------------------------------------------------\n");
-				printf("\t\t\t|\t\t所查询的起飞时间\"%s\"为空！！！\t\t|\n", StartTime);
-				printf("\t\t\t-----------------------------------------------------------------\n");
-				printf("是否继续查询(y/n):");
-				scanf("%c", &yOrn);
-				if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
-					SearchSelectOne(info);
-				else
-					break;
-			}
+		{
+			SelectOptions(info);
+			return;
+		}
 	}
+
+	printf("是否退出查询操作(y/n):");
+	scanf("%c", &yOrn);
+	printf("/n");
+	if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
+		SelectOptions(info);
+	else
+		SearchSelectOne(info);
 }
 
 //通过到达时间查询
 void searchByEndTime(flightLists *info)
 {
 	char EndTime[15];				//到达时间
+	int judge = 0;                     //判断是否查询到信息
+
 	printf("\n请输入所要查询的到达时间：");
 	gets(EndTime);
 	gets(EndTime);
@@ -230,29 +297,46 @@ void searchByEndTime(flightLists *info)
 			printf("\t|    %s  |\t %s   |    %s       |\t%s     |      %s      |    %s      |    %d      |\n", info->infos[i].FlightNum, info->infos[i].StartPoint, info->infos[i].EndPoint,
 				info->infos[i].StartTime, info->infos[i].EndTime, info->infos[i].PlaneType, info->infos[i].price);
 			puts("\t-------------------------------------------------------------------------------------------------------------------------");
+			judge++;
+		}
 
+	}
+
+	if (judge == 0)
+	{
+		printf("\n\n");
+		printf("\t\t\t---------------------------------------------------------\n");
+		printf("\t\t\t|\t\t所查询的航班号\"%s\"为空！！！\t\t|\n", EndTime);
+		printf("\t\t\t---------------------------------------------------------\n");
+		printf("是否继续查询(y/n):");
+		scanf("%c", &yOrn);
+		if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
+		{
+			SearchSelectOne(info);
+			return;
 		}
 		else
-			if (i == info->length - 1)
-			{
-				printf("\n\n");
-				printf("\t\t\t-----------------------------------------------------------------\n");
-				printf("\t\t\t|\t\t所查询的到达时间\"%s\"为空！！！\t\t|\n", EndTime);
-				printf("\t\t\t-----------------------------------------------------------------\n");
-				printf("是否继续查询(y/n):");
-				scanf("%c", &yOrn);
-				if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
-					SearchSelectOne(info);
-				else
-					break;
-			}
+		{
+			SelectOptions(info);
+			return;
+		}
 	}
+
+	printf("是否退出查询操作(y/n):");
+	scanf("%c", &yOrn);
+	printf("/n");
+	if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
+		SelectOptions(info);
+	else
+		SearchSelectOne(info);
 }
 
 //通过机型查询
 void searchByPlaneType(flightLists *info)
 {
 	char PlaneType[10];				//机型
+	int judge = 0;                     //判断是否查询到信息
+
 	printf("\n请输入所要查询的机型：");
 	gets(PlaneType);
 	gets(PlaneType);
@@ -267,21 +351,36 @@ void searchByPlaneType(flightLists *info)
 			printf("\t|    %s  |\t %s   |    %s       |\t%s     |      %s      |    %s      |    %d     |\n", info->infos[i].FlightNum, info->infos[i].StartPoint, info->infos[i].EndPoint,
 				info->infos[i].StartTime, info->infos[i].EndTime, info->infos[i].PlaneType, info->infos[i].price);
 			puts("\t-------------------------------------------------------------------------------------------------------------------------");
+			judge++;
+		}
 
+	}
+
+	if (judge == 0)
+	{
+		printf("\n\n");
+		printf("\t\t\t---------------------------------------------------------\n");
+		printf("\t\t\t|\t\t所查询的航班号\"%s\"为空！！！\t\t|\n", PlaneType);
+		printf("\t\t\t---------------------------------------------------------\n");
+		printf("是否继续查询(y/n):");
+		scanf("%c", &yOrn);
+		if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
+		{
+			SearchSelectOne(info);
+			return;
 		}
 		else
-			if (i == info->length - 1)
-			{
-				printf("\n\n");
-				printf("\t\t\t---------------------------------------------------------\n");
-				printf("\t\t\t|\t\t所查询的机型\"%s\"为空！！！\t\t|\n", PlaneType);
-				printf("\t\t\t---------------------------------------------------------\n");
-				printf("是否继续查询(y/n):");
-				scanf("%c", &yOrn);
-				if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
-					SearchSelectOne(info);
-				else
-					break;
-			}
+		{
+			SelectOptions(info);
+			return;
+		}
 	}
+
+	printf("是否退出查询操作(y/n):");
+	scanf("%c", &yOrn);
+	printf("/n");
+	if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
+		SelectOptions(info);
+	else
+		SearchSelectOne(info);
 }

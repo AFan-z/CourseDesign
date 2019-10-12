@@ -1,5 +1,5 @@
 
-#define MAX 50
+#define MAX 50                      //航班数量最大为50
 
 typedef struct
 {                                   //航班信息
@@ -13,9 +13,26 @@ typedef struct
 }flightInfo;
 
 typedef struct {
-	flightInfo infos[MAX];
-	int length;					 //航班个数
+	flightInfo infos[MAX];       
+	int length;					 //航班数量
 }flightLists;
+
+
+//选择操作
+void SelectOptions(flightLists *info);
+
+
+
+/** ** ** ** ** ** ** 录入 ** ** ** ** ** ** ** ** ** ** ** **/
+
+//航班信息录入
+void InfoInput(flightLists *info);
+
+/** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
+
+
+
+/** ** ** ** ** ** ** 查询 ** ** ** ** ** ** ** ** ** ** ** **/
 
 //选择需要通过的信息查询航班信息
 void SearchSelectOne(flightLists *info);
@@ -37,3 +54,88 @@ void searchByEndTime(flightLists *info);
 
 //通过机型查询
 void searchByPlaneType(flightLists *info);
+
+/** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
+
+
+
+/** ** ** ** ** ** ** 排序 ** ** ** ** ** ** ** ** ** ** ** **/
+
+//选择需要通过的信息排序航班信息
+void SortSelectOne(flightLists *info);
+
+//通过航班号进行升序排序
+void SortByFlightNum(flightLists *info);
+
+//通过票价进行升、降序排序
+void SortByPrice(flightLists *info);
+
+//打印排序后信息
+void SortPrint(flightLists *info);
+
+/** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
+
+
+
+/** ** ** ** ** ** ** 删除 ** ** ** ** ** ** ** ** ** ** ** **/
+
+//选择需要通过的信息删除航班信息
+void DeleteSelectOne(flightLists *info);
+
+//根据航班号删除航班相关信息
+void DeleteByFlightNum(flightLists *info, int one);
+
+//根据机型删除航班相关信息
+void DeleteByPlaneType(flightLists *info, int one);
+
+//删除操作
+void DeleteOptions(flightLists *info, char type[], int one);
+
+/** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
+
+
+
+
+/** ** ** ** ** ** ** 修改 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
+
+
+//选择需要通过的信息修改航班信息
+void UpdateSelectOne(flightLists *info);
+
+//根据航班号修改航班相关信息
+void UpdateByFlightNum(flightLists *info);
+
+//根据机型修改航班相关信息
+void UpdateByPlaneType(flightLists *info);
+
+
+//确认所要修改的航班信息
+int UpdateWhichOne(flightLists *info, int num[], int j);
+
+//选择修改某一处的航班信息
+void UpdateSelect(flightLists *info, int num[], int j);
+
+
+//修改航班号
+void UpdateFlightNum(flightLists *info, int one, int whichOne, int num[], int j);
+
+//修改起点站
+void UpdateStartPoint(flightLists *info, int one, int whichOne, int num[], int j);
+
+//修改终点站
+void UpdateEndPoint(flightLists *info, int one, int whichOne, int num[], int j);
+
+//修改起飞时间
+void UpdateStartTime(flightLists *info, int one, int whichOne, int num[], int j);
+
+//修改到达时间
+void UpdateEndTime(flightLists *info, int one, int whichOne, int num[], int j);
+
+//修改机型
+void UpdatePlaneType(flightLists *info, int one, int whichOne, int num[], int j);
+
+//修改票价
+void UpdatePrice(flightLists *info, int one, int whichOne, int num[], int j);
+
+
+/** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/

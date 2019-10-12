@@ -1,53 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
-#include<stdlib.h>  //提供exit（）原型
+#include<stdlib.h>  
 #include "Flight.h"
-
-
-
-void infoInput(flightLists *info)    //航班信息录入
-{
-
-	FILE *fp;
-
-	//打开air.txt文件
-	if ((fp = fopen("flight.txt", "w+")) == NULL) {
-		fprintf(stdout, "错误，打不开\"flight.txt\"文件\n");
-		exit(EXIT_FAILURE);       //退出
-	}
-
-	puts("请录入航班信息：");
-	puts("分别输入:航班号(例:AB123)、起点站(例:广州)、终点站(例:北京)、起飞时间(例:10-10/12:12)\n"
-		"到达时间(例:10-10/20:12)、机型(例:AC123)、票价(例:1234)(以空格分隔开每个数据,回车确认)\n");
-	info->length = 0;
-	char yOrn = 'y';
-	fprintf(fp, "|   航班号  	|   起点站	|   终点站	|		 起飞时间		|		到达时间		|    机型	|    票价	|\n");
-	for (int i = 0; i < MAX; i++)
-	{
-		if (yOrn == 'y' || yOrn == 'Y'|| yOrn == '\n')
-		{
-			//录入航班信息
-			fscanf(stdin, "%s%s%s%s%s%s%d", info->infos[i].FlightNum, info->infos[i].StartPoint, info->infos[i].EndPoint,
-				info->infos[i].StartTime, info->infos[i].EndTime, info->infos[i].PlaneType, &info->infos[i].price);  
-			//将航班信息输出到文件
-			fprintf(fp, "	%s			%s		 %s			%s			%s				 %s		%d\n", info->infos[i].FlightNum, info->infos[i].StartPoint, info->infos[i].EndPoint,
-				info->infos[i].StartTime, info->infos[i].EndTime, info->infos[i].PlaneType, info->infos[i].price);
-
-			info->length++;   //记录航班数
-
-		}else
-			break;
-		printf("\n");
-		printf("是否继续需要录入航班信息(y/n):");
-		scanf("%c", &yOrn);
-		scanf("%c", &yOrn);
-		printf("\n");
-	}
-	fclose(fp);
-}
-
-
-
 
 
 /*
@@ -59,21 +13,73 @@ void infoInput(flightLists *info)    //航班信息录入
 （3）排序：可按航班的航班号、票价进行排序；
 （4）删除：根据航班号删除航班相关信息；
 （5）修改：根据航班号修改航班相关信息。
-
 */
 
-int main()
+
+//选择操作
+void SelectOptions(flightLists *info)
+{
+		int one = -1;
+		printf("\n");
+		puts("\t---------------------------------");
+		puts("\t|\t1.录入航班信息\t\t|");
+		puts("\t---------------------------------");
+		puts("\t|\t2.查询航班信息\t\t|");
+		puts("\t---------------------------------");
+		puts("\t|\t3.排序航班信息\t\t|");
+		puts("\t---------------------------------");
+		puts("\t|\t4.删除航班信息\t\t|");
+		puts("\t---------------------------------");
+		puts("\t|\t5.修改航班信息\t\t|");
+		puts("\t---------------------------------");
+		puts("\t|\t0.退出程序    \t\t|");
+		puts("\t---------------------------------");
+
+		printf("请问需要选择的操作(0-5)：");
+		while (one < 0 || one > 5)
+		{
+			scanf("%d", &one);
+			switch (one)
+			{
+			case 0:
+				break;
+			case 1:
+				InfoInput(info);
+				break;
+			case 2:
+				SearchSelectOne(info);
+				break;
+			case 3:
+				SortSelectOne(info);
+				break;
+			case 4:
+				DeleteSelectOne(info);
+				break;
+			case 5:
+				UpdateSelectOne(info);
+				break;
+			default:
+				printf("请输入正确的信息来选择操作(0-5):");
+			}
+		}
+		printf("\n");
+}
+
+
+int main(void)
 {
 	flightLists *info;
 	info = (flightLists *)malloc(sizeof(flightLists));
 
-	infoInput(info);
-	SearchSelectOne(info);
+	SelectOptions(info);  //选择操作
+
+	//InfoInput(info);
+	//SearchSelectOne(info);
+	//SortSelectOne(info);
+	//DeleteByFlightNum(info);
+	//UpdateByFlightNum(info);
 
 	free(info);
 	system("pause");
 	return(0);
 }
-
-
-
