@@ -18,21 +18,34 @@ typedef struct {
 }flightLists;
 
 
-//选择操作
+//选择操作(FlightSystem.c)
 void SelectOptions(flightLists *info);
 
 
 
-/** ** ** ** ** ** ** 录入 ** ** ** ** ** ** ** ** ** ** ** **/
+/** ** ** ** ** ** ** 录入(FlightInfoInput.c) ** ** ** ** ** ** ** ** ** ** ** **/
+
+
+//选择需要通过的信息录入航班信息
+void InputSelectOne(flightLists *info);
+
+//导入原有的数据文件信息
+void InputByOld(flightLists *info);
 
 //航班信息录入
-void InfoInput(flightLists *info);
+void InputInfo(flightLists *info);
+
+//从文件中录入航班信息
+void InfoInputByFlie(flightLists *info);
+
+//打印航班信息
+void InfoPrint(flightLists *info);
 
 /** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
 
 
 
-/** ** ** ** ** ** ** 查询 ** ** ** ** ** ** ** ** ** ** ** **/
+/** ** ** ** ** ** ** 查询(FlightInfoInput.c) ** ** ** ** ** ** ** ** ** ** ** **/
 
 //选择需要通过的信息查询航班信息
 void SearchSelectOne(flightLists *info);
@@ -59,7 +72,7 @@ void searchByPlaneType(flightLists *info);
 
 
 
-/** ** ** ** ** ** ** 排序 ** ** ** ** ** ** ** ** ** ** ** **/
+/** ** ** ** ** ** ** 排序(FlightInfoSort.c) ** ** ** ** ** ** ** ** ** ** ** **/
 
 //选择需要通过的信息排序航班信息
 void SortSelectOne(flightLists *info);
@@ -77,7 +90,7 @@ void SortPrint(flightLists *info);
 
 
 
-/** ** ** ** ** ** ** 删除 ** ** ** ** ** ** ** ** ** ** ** **/
+/** ** ** ** ** ** ** 删除(FlightInfoDelete.c) ** ** ** ** ** ** ** ** ** ** ** **/
 
 //选择需要通过的信息删除航班信息
 void DeleteSelectOne(flightLists *info);
@@ -96,7 +109,7 @@ void DeleteOptions(flightLists *info, char type[], int one);
 
 
 
-/** ** ** ** ** ** ** 修改 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
+/** ** ** ** ** ** ** 修改(FlightInfoUpdate.c) ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
 
 
 //选择需要通过的信息修改航班信息

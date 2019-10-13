@@ -44,7 +44,7 @@ void SelectOptions(flightLists *info)
 			case 0:
 				break;
 			case 1:
-				InfoInput(info);
+				InputSelectOne(info);
 				break;
 			case 2:
 				SearchSelectOne(info);
@@ -70,14 +70,10 @@ int main(void)
 {
 	flightLists *info;
 	info = (flightLists *)malloc(sizeof(flightLists));
+	info->length = 0;  //设置顺序表初始长度
 
+	InputByOld(info);   //导入数据文件
 	SelectOptions(info);  //选择操作
-
-	//InfoInput(info);
-	//SearchSelectOne(info);
-	//SortSelectOne(info);
-	//DeleteByFlightNum(info);
-	//UpdateByFlightNum(info);
 
 	free(info);
 	system("pause");

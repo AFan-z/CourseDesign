@@ -82,6 +82,7 @@ void DeleteOptions(flightLists *info, char type[], int one)
 				for (int j = i; j < info->length - 1; j++)	//将info[i]之后的元素前移一个位置			
 					info->infos[j] = info->infos[j + 1];
 				info->length--;
+				i = -1;                                   //防止有重复航班信息叠加在一起 
 			}
 		}
 	}
@@ -94,6 +95,7 @@ void DeleteOptions(flightLists *info, char type[], int one)
 				for (int j = i; j < info->length - 1; j++)	//将info[i]之后的元素前移一个位置			
 					info->infos[j] = info->infos[j + 1];
 				info->length--;
+				i = -1;                                   //防止有重复航班信息叠加在一起 
 			}
 		}
 	}
