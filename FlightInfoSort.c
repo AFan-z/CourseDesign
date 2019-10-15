@@ -5,10 +5,11 @@
 
 
 //选择需要通过的信息排序航班信息
-void SortSelectOne(flightLists *info)
+void SortSelectOne(flightLists* info)
 {
 	int one = -1;
 	char sort;
+	printf("\n");
 	puts("\t-------------------------");
 	puts("\t|\t1.航班号\t|");
 	puts("\t-------------------------");
@@ -41,7 +42,7 @@ void SortSelectOne(flightLists *info)
 
 
 //通过航班号进行升、降序排序
-void SortByFlightNum(flightLists *info)
+void SortByFlightNum(flightLists* info)
 {
 	flightInfo temp;  //交换
 	char sort = 'A';  // 升序(ASC)或者降序(DESC),默认升序
@@ -64,14 +65,14 @@ void SortByFlightNum(flightLists *info)
 			{
 				if (strcmp(info->infos[x].FlightNum, info->infos[y].FlightNum) > 0)
 				{
-						temp = info->infos[x];
-						info->infos[x] = info->infos[y];
-						info->infos[y] = temp;
+					temp = info->infos[x];
+					info->infos[x] = info->infos[y];
+					info->infos[y] = temp;
 				}
 			}
 		}
 	}
-	else if(sort == 'D' || sort == 'd')
+	else if (sort == 'D' || sort == 'd')
 	{
 		for (int x = 0; x < info->length; x++)
 		{
@@ -92,7 +93,7 @@ void SortByFlightNum(flightLists *info)
 
 
 //通过票价进行升、降序排序
-void SortByPrice(flightLists *info)
+void SortByPrice(flightLists* info)
 {
 	flightInfo temp;  //交换
 	char sort = 'A';  // 升序(ASC)或者降序(DESC),默认升序
@@ -143,17 +144,17 @@ void SortByPrice(flightLists *info)
 
 
 //打印排序后信息
-void SortPrint(flightLists *info)
+void SortPrint(flightLists* info)
 {
 	char yOrn;
 
 	puts("\t-------------------------------------------------------------------------------------------------------------------------");
-	puts("\t|   航班号  |   起点站	|   终点站	|	 起飞时间	|	到达时间	|    机型	|    票价	|");
+	puts("\t|   航班号  |   起点站	|   终点站	|	 起飞时间	|	到达时间	|    机型	|    票价       |");
 	puts("\t-------------------------------------------------------------------------------------------------------------------------");
 
 	for (int i = 0; i < info->length; i++)
 	{
-		printf("\t|    %s  |\t %s   |    %s       |\t%s     |      %s      |    %s      |    %d      |\n", info->infos[i].FlightNum, info->infos[i].StartPoint, info->infos[i].EndPoint,
+		printf("\t|   %s  |\t %s   |    %s       |\t%s    |      %s     |   %s     |    %d       |\n", info->infos[i].FlightNum, info->infos[i].StartPoint, info->infos[i].EndPoint,
 			info->infos[i].StartTime, info->infos[i].EndTime, info->infos[i].PlaneType, info->infos[i].price);
 		puts("\t-------------------------------------------------------------------------------------------------------------------------");
 	}

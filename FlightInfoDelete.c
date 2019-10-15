@@ -5,10 +5,11 @@
 
 
 //选择需要通过的信息删除航班信息
-void DeleteSelectOne(flightLists *info)
+void DeleteSelectOne(flightLists* info)
 {
 	int one = -1;
 	char del;
+	printf("\n");
 	puts("\t-------------------------");
 	puts("\t|\t1.航班号\t|");
 	puts("\t-------------------------");
@@ -25,6 +26,7 @@ void DeleteSelectOne(flightLists *info)
 		switch (one)
 		{
 		case 0:
+			InfoDelOrUpdate(info);  
 			SelectOptions(info);
 			break;
 		case 1:
@@ -40,7 +42,7 @@ void DeleteSelectOne(flightLists *info)
 }
 
 //根据航班号删除航班相关信息
-void DeleteByFlightNum(flightLists *info, int one)
+void DeleteByFlightNum(flightLists* info, int one)
 {
 
 	char flightNumOne[10];             //航班号
@@ -54,7 +56,7 @@ void DeleteByFlightNum(flightLists *info, int one)
 
 
 //根据机型删除航班相关信息
-void DeleteByPlaneType(flightLists *info, int one)
+void DeleteByPlaneType(flightLists* info, int one)
 {
 
 	char PlaneType[10];             //机型
@@ -67,7 +69,7 @@ void DeleteByPlaneType(flightLists *info, int one)
 
 
 //删除操作
-void DeleteOptions(flightLists *info, char type[], int one)
+void DeleteOptions(flightLists* info, char type[], int one)
 {
 
 	char yOrn;
@@ -86,7 +88,7 @@ void DeleteOptions(flightLists *info, char type[], int one)
 			}
 		}
 	}
-	else if(one == 2)   //通过机型删除操作
+	else if (one == 2)   //通过机型删除操作
 	{
 		for (int i = 0; i < info->length; i++)
 		{
@@ -115,6 +117,7 @@ void DeleteOptions(flightLists *info, char type[], int one)
 		}
 		else
 		{
+			InfoDelOrUpdate(info);
 			SelectOptions(info);
 			return;
 		}
@@ -129,5 +132,8 @@ void DeleteOptions(flightLists *info, char type[], int one)
 	if (yOrn == 'y' || yOrn == 'Y' || yOrn == '\n')
 		DeleteSelectOne(info);
 	else
+	{
+		InfoDelOrUpdate(info);
 		SelectOptions(info);
+	}
 }
