@@ -130,7 +130,7 @@ void InputInfo(flightLists* info)
 			fprintf(FInfo, "%s	%s	%s	%s	%s	%s	%d\n", info->infos[i].FlightNum, info->infos[i].StartPoint, info->infos[i].EndPoint,
 				info->infos[i].StartTime, info->infos[i].EndTime, info->infos[i].PlaneType, info->infos[i].price);
 			info->length++;   //记录航班数
-
+			printf("\n航班信息录入成功！！！\n");
 		}
 		else
 		{
@@ -197,6 +197,7 @@ void InfoInputByFlie(flightLists* info)
 		info->length++;
 	}
 
+	printf("\n航班信息录入成功！！！\n");
 
 	if (fclose(fp) != 0 || fclose(FInfo) != 0)
 		fprintf(stderr, "错误，关闭不了文件\n");
