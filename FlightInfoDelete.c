@@ -8,7 +8,7 @@
 void DeleteSelectOne(flightLists* info)
 {
 	int one = -1;
-	char del;
+	
 	printf("\n");
 	puts("\t-------------------------");
 	puts("\t|\t1.航班号\t|");
@@ -26,8 +26,8 @@ void DeleteSelectOne(flightLists* info)
 		switch (one)
 		{
 		case 0:
-			InfoDelOrUpdate(info);  
-			SelectOptions(info);
+			InfoDelOrUpdate(info);        //保存至数据文件
+			SelectOptions(info);         //选择操作
 			break;
 		case 1:
 			DeleteByFlightNum(info, one);
@@ -73,7 +73,7 @@ void DeleteOptions(flightLists* info, char type[], int one)
 {
 
 	char yOrn;
-	int length = info->length;
+	int length = info->length;        //指向顺序表尾部
 
 	if (one == 1)  //通过航班号删除操作
 	{
@@ -117,7 +117,7 @@ void DeleteOptions(flightLists* info, char type[], int one)
 		}
 		else
 		{
-			InfoDelOrUpdate(info);
+			InfoDelOrUpdate(info);		 //保存至数据文件
 			SelectOptions(info);
 			return;
 		}
@@ -133,7 +133,7 @@ void DeleteOptions(flightLists* info, char type[], int one)
 		DeleteSelectOne(info);
 	else
 	{
-		InfoDelOrUpdate(info);
+		InfoDelOrUpdate(info);			 //保存至数据文件
 		SelectOptions(info);
 	}
 }

@@ -1,4 +1,3 @@
-#pragma once
 
 #define FLIGHT_INFO_MAX          100             //航班数量最大为100
 
@@ -13,7 +12,7 @@ typedef struct
 	int price;						//票价
 }flightInfo;
 
-typedef struct {
+typedef struct {               //顺序表
 	flightInfo infos[FLIGHT_INFO_MAX];
 	int length;					 //航班数量
 }flightLists;
@@ -36,7 +35,7 @@ void InputSelectOne(flightLists* info);
 //导入原有的数据文件信息
 void InputByOld(flightLists* info);
 
-//航班信息录入
+//航班信息手动录入
 void InputInfo(flightLists* info);
 
 //从文件中录入航班信息
@@ -45,7 +44,7 @@ void InfoInputByFlie(flightLists* info);
 //打印航班信息
 void InfoPrint(flightLists* info);
 
-//修改或删除后保存至文件中
+//航班信息修改或删除后保存至文件中
 void InfoDelOrUpdate(flightLists* info);
 
 /** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
@@ -66,7 +65,7 @@ void searchByStartPoint(flightLists* info);
 //通过终点站查询
 void searchByEndPoint(flightLists* info);
 
-//通过终点站查询
+//通过起飞时间查询
 void searchByStartTime(flightLists* info);
 
 //通过到达时间查询
@@ -84,7 +83,7 @@ void searchByPlaneType(flightLists* info);
 //选择需要通过的信息排序航班信息
 void SortSelectOne(flightLists* info);
 
-//通过航班号进行升序排序
+//通过航班号进行升、降序排序
 void SortByFlightNum(flightLists* info);
 
 //通过票价进行升、降序排序

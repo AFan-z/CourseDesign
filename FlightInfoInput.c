@@ -7,8 +7,8 @@
 //选择需要通过的信息录入航班信息
 void InputSelectOne(flightLists* info)
 {
-	int one = -1;
-	char input;
+	int one = -1;      //选择接下来的操作序号
+	
 	printf("\n");
 	puts("\t-------------------------");
 	puts("\t|\t1.手动录入\t|");
@@ -56,8 +56,8 @@ void InputByOld(flightLists* info)
 	}
 
 	ch = fgetc(fp);                  //判断是否为空文件
-	if (ch != EOF)					//如果为空重新打开文件流
-	{
+	if (ch != EOF)					 //如果不为空重新打开文件流
+	{								 //防止fgetc(fp)指向下一个字符
 		fclose(fp);
 		if ((fp = fopen("flightInfo.txt", "a+")) == NULL) {
 			fprintf(stdout, "错误，打不开\"flightInfo.txt\"文件\n");
@@ -79,11 +79,11 @@ void InputByOld(flightLists* info)
 }
 
 
-//航班信息录入
+//航班信息手动录入
 void InputInfo(flightLists* info)
 {
 
-	FILE* fp, * FInfo;
+	FILE* fp, * FInfo;   //fp为临时文件指针，FInfo为航班数据文件指针
 
 	//打开临时文件
 	if ((fp = fopen("flightInput.txt", "w+")) == NULL) {
@@ -163,10 +163,10 @@ void InputInfo(flightLists* info)
 //从文件中录入航班信息
 void InfoInputByFlie(flightLists* info)
 {
-	FILE* fp, * FInfo;
+	FILE* fp, * FInfo;     //fp为临时文件指针，FInfo为航班数据文件指针
 	int i = info->length;
-	char flieName[20];  //文件名
-	char yOrn;
+	char flieName[20];   //文件名
+	char yOrn;          //选择是否继续操作 'y'、'Y'、'\n'为确认
 
 	printf("\n请输入要导入航班信息的文件名：");
 	gets(flieName);
@@ -236,12 +236,12 @@ void InfoPrint(flightLists* info)
 		printf("\t\t\t---------------------------------------------------------\n");
 	}
 
-	SelectOptions(info);
+	SelectOptions(info);   //选择操作
 
 }
 
 
-//修改或删除后保存至文件中
+//航班信息修改或删除后保存至文件中
 void InfoDelOrUpdate(flightLists* info)
 {
 	FILE* fp;

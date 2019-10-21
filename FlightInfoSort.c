@@ -8,7 +8,7 @@
 void SortSelectOne(flightLists* info)
 {
 	int one = -1;
-	char sort;
+
 	printf("\n");
 	puts("\t-------------------------");
 	puts("\t|\t1.航班号\t|");
@@ -44,7 +44,7 @@ void SortSelectOne(flightLists* info)
 //通过航班号进行升、降序排序
 void SortByFlightNum(flightLists* info)
 {
-	flightInfo temp;  //交换
+	flightInfo temp;  //交换，作为排序交换的媒介
 	char sort = 'A';  // 升序(ASC)或者降序(DESC),默认升序
 
 	printf("\n请输入通过升序(ASC)或者降序(DESC)排序,(A/D):");

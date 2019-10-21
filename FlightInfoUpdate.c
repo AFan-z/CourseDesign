@@ -8,7 +8,7 @@
 void UpdateSelectOne(flightLists* info)
 {
 	int one = -1;
-	char update;
+
 	printf("\n");
 	puts("\t-------------------------");
 	puts("\t|\t1.航班号\t|");
@@ -51,7 +51,7 @@ void UpdateByFlightNum(flightLists* info)
 	printf("\n请输入所要修改的航班号：");
 	gets(flightNumOne);
 	gets(flightNumOne);
-	int num[FLIGHT_INFO_MAX];
+	int num[FLIGHT_INFO_MAX];       //保存所要修改航班的顺序表下标
 	int j = 0;
 	for (int i = 0; i < info->length; i++)
 	{
